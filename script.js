@@ -18,6 +18,7 @@ function displayTemperature(response) {
   iconElement.setAttribute('src', response.data.condition.icon_url);
   iconElement.setAttribute('src', response.data.condition.icon_url);
   iconElement.setAttribute('alt', response.data.condition.description);
+  getForecast(response.data.coordinates);
 }
 
 function formatDate(timestamp) {
@@ -67,10 +68,10 @@ function displayForecast(response) {
         />
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-temperature-max"> ${Math.round(
-            forecastDay.temperature.max
+            forecastDay.temperature.maximum
           )}° </span>
           <span class="weather-forecast-temperature-min"> ${Math.round(
-            forecastDay.temperature.min
+            forecastDay.temperature.minimum
           )}° </span>
         </div>
       </div>`;
@@ -114,8 +115,6 @@ function displayCelsiusTemperature(event) {
   farenheitLink.classList.remove('active');
   let temperatureElement = document.querySelector('#temperature');
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
-
-  getForecast(response.data.coordinates);
 }
 
 let celsiusTemperature = null;
